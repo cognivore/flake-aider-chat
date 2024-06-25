@@ -1,7 +1,7 @@
 {
   description = "Flake providing dev shell for using aider-chat in NixOS";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs";
   };
 
   outputs = { self, nixpkgs }:
@@ -20,7 +20,7 @@
               (pkgs.python3.withPackages (ps: with ps; [ virtualenv pip setuptools wheel ]))
             ];
             # set LD_LIBRARY_PATH environment variable to avoid error. see https://discourse.nixos.org/t/how-to-solve-libstdc-not-found-in-shell-nix/25458
-            LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib";
+            # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib";
             shellHook = ''
               # create virtualenv if not exist
               if [ ! -d .venv ]; then
